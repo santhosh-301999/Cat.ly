@@ -18,4 +18,4 @@ jobs:
     - stage: client
       script:
         - echo 'deploying client!!'
-	    - catalyst deploy --only client --project 1043000000003010 --verbose --token m_1004.98b2247babdbf41642ba5d4a2ab542d8.3d571aa6a7f3256a4e7438badb4bd42f
+	      - catalyst deploy --only client --project 1043000000003010 --verbose --token m_1004.98b2247babdbf41642ba5d4a2ab542d8.3d571aa6a7f3256a4e7438badb4bd42f
