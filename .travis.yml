@@ -1,21 +1,32 @@
 language: node_js
 node_js:
-  - 8
+  - 12
 install:
   - npm install -g zcatalyst-cli
 jobs:
   include:
     - stage: functions
       before_script:
-        - cd functions/catly/server
+        - cd functions/catly
+        - pwd
       script:
-        - echo 'function!!'
-        - echo 'Installing Deps!'
+        - echo 'functions!!'
+        - echo 'Installing Dependencies!'
         - npm install
       after_success:
-        - echo 'deploying function!'
+        - echo 'deploying functions!'
         - catalyst deploy --only functions --project 1043000000003010 --verbose --token m_1004.98b2247babdbf41642ba5d4a2ab542d8.3d571aa6a7f3256a4e7438badb4bd42f
     - stage: client
+      before_script:
+        - cd client/app
+        - pwd
       script:
-        - echo 'deploying client!!'
-	      - catalyst deploy --only client --project 1043000000003010 --verbose --token m_1004.98b2247babdbf41642ba5d4a2ab542d8.3d571aa6a7f3256a4e7438badb4bd42f
+        - echo 'client!!'
+        - echo 'Installing Dependencies!'
+        - yarn install
+        - yarn build
+        - cp ../client-package.json build/.
+        - cd build
+      after_success:
+        - echo 'deploying client!'
+        - catalyst deploy --only client --project 1043000000003010 --verbose --token m_1004.98b2247babdbf41642ba5d4a2ab542d8.3d571aa6a7f3256a4e7438badb4bd42f
